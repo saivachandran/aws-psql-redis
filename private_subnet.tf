@@ -39,7 +39,7 @@ resource "aws_nat_gateway" "nat2" {
 }
 
 resource "aws_route_table_association" "private-subnet-1" {
-  subnet_id      = aws_subnet.private_subnet_2.id
+  subnet_id      = aws_subnet.private_subnet_1.id
   route_table_id = aws_route_table.nat-associations-1.id
   depends_on             = [aws_nat_gateway.nat1]
 }
