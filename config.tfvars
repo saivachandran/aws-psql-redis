@@ -1,16 +1,15 @@
-  ami                  = "ami-083654bd07b5da81d"
-region = "us-east-1"
-key_name = "myweb"
-  additional_tags = {
-    "Application" = "flaskapp"
-    "Name"        = "Flask-app-server"
-    "Type"        = "Instance"
-  }
-  ingress_rule = {
-    "22" = ["0.0.0.0/0"]
-    "80"   = ["0.0.0.0/0"]
-  }
-    security_group_name  = "flask-app-server-security-group"
+ami                   = "ami-083654bd07b5da81d"
+region                = "us-east-1"
+key_name              = "myweb"
+additional_tags = {
+  "Application" = "flaskapp"
+  "Name"        = "Flask-app-server"
+  "Type"        = "Instance"
+}
+ingress_rule = {
+  "22" = ["0.0.0.0/0"]
+  "80"   = ["0.0.0.0/0"]
+}
 
 vpc_cidr            = "10.0.0.0/16"
 p1_subnet_cidr      = "10.0.1.0/24"
