@@ -1,7 +1,6 @@
 variable "vpc_cidr" {}
 variable "p1_subnet_cidr" {}
 variable "p2_subnet_cidr" {}
-variable "additional_tags" { type = map(string) }
 
 
 
