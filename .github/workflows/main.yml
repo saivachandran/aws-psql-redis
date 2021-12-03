@@ -48,3 +48,4 @@ jobs:
         run: terraform  apply -var-file=config.tfvars -auto-approve
       # - name: apply
       #   run: terraform  apply -var-file=config.tfvars -auto-approve
+      
