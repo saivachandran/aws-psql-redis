@@ -11,7 +11,7 @@ jobs:
     name: terraform deployment
     runs-on: ubuntu-latest
     env:
-      BUCKET_NAME: "terraform-backend-buckets"
+      BUCKET_NAME: "myweb-098"
       BUCKET_REGION: "us-east-1"
     # strategy:
     #   matrix:
