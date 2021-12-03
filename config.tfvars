@@ -21,4 +21,4 @@ ingress_rule = {
 
 
 username = "dodonotdo"
-password = "password$@!"
+password = "password12345"
