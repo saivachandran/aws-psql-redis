@@ -3,10 +3,9 @@ variable "p1_subnet_cidr" {}
 variable "p2_subnet_cidr" {}
 variable "pr1_subnet_cidr" {}
 variable "pr2_subnet_cidr" {}
-
-
+variable "username" {}
+variable "password" {}
 variable "region" {}
-
 # instance 
 variable "ami" {}
 variable "instance_type" {}
