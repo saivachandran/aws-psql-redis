@@ -1,8 +1,7 @@
 variable "vpc_cidr" {}
 variable "p1_subnet_cidr" {}
 variable "p2_subnet_cidr" {}
-
-
+variable "region" {}
 
 # instance 
 variable "ami" {}
