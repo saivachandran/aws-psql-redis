@@ -4,22 +4,22 @@ on:
   push:
     branches:
     - main
-    paths:
-    - 'infra-code/**'
+    # paths:
+    # - 'infra-code/**'
 jobs:
   dev:
     name: terraform deployment
     runs-on: ubuntu-latest
     env:
       BUCKET_NAME: "terraform-backend-buckets"
-      BUCKET_REGION: "eu-central-1"
-    strategy:
-      matrix:
-        folder: ['infra-code']
-    defaults:
-      run:
-        shell: bash
-        working-directory: ${{ matrix.folder }}
+      BUCKET_REGION: "us-east-1"
+    # strategy:
+    #   matrix:
+    #     folder: ['infra-code']
+    # defaults:
+    #   run:
+    #     shell: bash
+    #     working-directory: ${{ matrix.folder }}
     steps:
       - name: checkout
         uses: actions/checkout@v1
@@ -46,4 +46,3 @@ jobs:
         run: terraform  plan -var-file=config.tfvars
       - name: apply
         run: terraform  apply -var-file=config.tfvars -auto-approve
-        
