@@ -5,7 +5,7 @@ resource "aws_instance" "tf" {
   instance_type               = var.instance_type
   key_name                    = var.key_name
   monitoring                  = false
-  subnet_id                   = var.subnet_id
+  subnet_id                   = aws_subnet.public_subnet-1.id
   vpc_security_group_ids      = [aws_security_group.tf.id]
   user_data                   = var.user_data
   root_block_device {
@@ -22,7 +22,7 @@ resource "aws_instance" "tf" {
 
 resource "aws_security_group" "tf" {
   description = "Security group for ${var.security_group_name}"
-  vpc_id      = var.vpc_id
+  vpc_id      = aws_vpc.vpc.id
   name        = var.security_group_name
 
   egress {
