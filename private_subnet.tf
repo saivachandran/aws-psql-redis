@@ -26,14 +26,14 @@ resource "aws_eip" "ps2" {
 
 resource "aws_nat_gateway" "nat1" {
   allocation_id = aws_eip.ps1.id
-  subnet_id     = aws_subnet.public_subnet.0.id
+  subnet_id     = aws_subnet.private_subnet_1.id
   tags = tomap(var.additional_tags)
 
 }
 
 resource "aws_nat_gateway" "nat2" {
   allocation_id = aws_eip.ps2.id
-  subnet_id     = aws_subnet.public_subnet.1.id
+  subnet_id     = aws_subnet.private_subnet_2.id
   tags = tomap(var.additional_tags)
 
 }
