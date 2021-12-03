@@ -7,4 +7,4 @@ sudo hostnamectl set-hostname ${hostname}
 sudo apt update 
 sudo apt install postgresql-client  -y
 
-PGPASSWORD=${password} psql -h ${host} -U ${username} -d postgresql
+PGPASSWORD=${password} psql -h ${aws_db_instance.psql-sameed.address} -U ${username} -d postgresql
