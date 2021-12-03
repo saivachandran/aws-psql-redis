@@ -10,12 +10,11 @@ pr1_subnet_cidr     = "10.0.3.0/24"
 pr2_subnet_cidr     = "10.0.4.0/24"
 
 additional_tags = {
-  "Application" = "flaskapp"
-  "Name"        = "Flask-app-server"
+  "Application" = "db"
+  "Name"        = "db-server"
   "Type"        = "Instance"
 }
 ingress_rule = {
   "22" = ["0.0.0.0/0"]
-  "80"   = ["0.0.0.0/0"]
 }
 
