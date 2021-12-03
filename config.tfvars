@@ -17,3 +17,5 @@ p2_subnet_cidr      = "10.0.2.0/24"
 instance_type       = "t2.micro"
 security_group_name = "bastion-host"
 
+pr1_subnet_cidr = "10.0.3.0/24"
+pr2_subnet_cidr = "10.0.3.0/24"
