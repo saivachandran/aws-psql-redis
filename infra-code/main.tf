@@ -6,7 +6,7 @@ resource "aws_vpc" "vpc" {
 }
 
 # public subnet function
-resource "aws_subnet" "private_subnet" {
+resource "aws_subnet" "public_subnet" {
   count             = length(var.availability_zones)
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = element(var.public_subnet_cidr_blocks, count.index)
