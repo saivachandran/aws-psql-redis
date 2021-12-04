@@ -1,6 +1,6 @@
-region                      = "eu-central-1"
+region                      = "us-east-2"
 vpc_cidr_block              = "10.68.0.0/16"
-availability_zones          = ["eu-central-1a", "eu-central-1b"]
+availability_zones          = ["us-east-2a", "us-east-2b"]
 public_subnet_cidr_blocks   = ["10.68.1.0/24", "10.68.2.0/24"]
 private_subnet_cidr_blocks  = ["10.68.3.0/24", "10.68.4.0/24"]
 additional_tags             = { Envs = "production" }
