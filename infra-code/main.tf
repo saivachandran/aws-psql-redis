@@ -2,7 +2,12 @@ resource "aws_vpc" "vpc" {
   cidr_block           = var.vpc_cidr_block
   enable_dns_support   = true
   enable_dns_hostnames = true  
-  tags = {}
+  tags   = merge(
+  { 
+    Name = "vpc" 
+  }, 
+    tomap(var.additional_tags)
+  )
 }
 
 # public subnet function
@@ -66,12 +71,11 @@ resource "aws_route_table" "rt" {
     cidr_block    = "0.0.0.0/0"
     gateway_id    = aws_nat_gateway.nat[count.index].id
   }
-  depends_on      = [aws_nat_gateway.nat]
 }
 
 resource "aws_route_table_association" "route_table_association" {
+  count           = length(var.availability_zones)
   subnet_id      = aws_subnet.private_subnet[count.index].id
   route_table_id = aws_route_table.rt[count.index].id
-  depends_on     = [aws_route_table.rt]
   tags           = {}
 }
