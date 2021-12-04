@@ -28,7 +28,7 @@ resource "aws_subnet" "public_subnet" {
 }
 
 resource "aws_internet_gateway" "igw" {
-  count             = length(var.availability_zones)
+  # count             = length(var.availability_zones)
   vpc_id            = aws_vpc.vpc.id
 }
 
@@ -38,14 +38,15 @@ resource "aws_route_table" "main" {
   tags              = {}
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.igw[count.index].id
+    # gateway_id = aws_internet_gateway.igw[count.index].id
+    gateway_id = aws_internet_gateway.igw.id
   }
 }
 
 resource "aws_route_table_association" "internet_access" {
   count          = length(var.availability_zones)
   subnet_id      = aws_subnet.public_subnet[count.index].id
-  route_table_id = aws_route_table.main[count.index].id
+  route_table_id = aws_route_table.main.id
 }
 
 # Private subnet functins
