@@ -7,6 +7,8 @@ variable "additional_tags" {
     default = {}
 }
 
+variable "application_name" {}
+
 variable "instances" {
   type        = any
   default     = {}
