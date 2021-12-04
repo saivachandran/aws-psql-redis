@@ -25,7 +25,7 @@ resource "aws_instance" "tf" {
     encrypted             = true
     iops                  = 3000
     throughput            = 125
-    volume_size           = 250
+    volume_size           = 200
     volume_type           = "gp3"
   }
   tags   = merge(
