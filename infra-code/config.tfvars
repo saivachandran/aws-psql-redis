@@ -13,6 +13,6 @@ instances = {
         key_name                    = "siva"
         instance_type               = "t2.micro"
         monitoring                  = false
-        instance_mode               = public
+        instance_mode               = "public"
     }
 }
