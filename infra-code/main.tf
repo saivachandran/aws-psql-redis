@@ -5,6 +5,29 @@ resource "aws_vpc" "vpc" {
   tags = tomap(var.additional_tags)
 }
 
+# public subnet function
+resource "aws_subnet" "private_subnet" {
+  count             = length(var.availability_zones)
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = element(var.public_subnet_cidr_blocks, count.index)
+  availability_zone = element(var.availability_zones, count.index)
+  map_public_ip_on_launch = false
+  tags = {}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Private subnet functins
 resource "aws_subnet" "private_subnet" {
   count             = length(var.availability_zones)
   vpc_id            = aws_vpc.vpc.id
