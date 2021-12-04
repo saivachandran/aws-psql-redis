@@ -15,7 +15,7 @@ resource "aws_instance" "tf" {
 instance_type                       = lookup(each.value, "instance_type")
   monitoring                        = lookup(each.value, "monitoring")
   ami                               = data.aws_ami.amazon2.id
-  subnet_id                         = aws_subnet.private_subnet[0].id
+  subnet_id                         = aws_subnet.public_subnet[0].id
   vpc_security_group_ids            = [aws_security_group.tf[each.key].id]
   user_data                         = ""
   root_block_device {
