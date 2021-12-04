@@ -4,7 +4,8 @@ resource "aws_vpc" "vpc" {
   enable_dns_hostnames = true  
   tags   = merge(
   { 
-    Name = "vpc" 
+    Name = "${application_name}-vpc"
+    time = timestamp()
   }, 
     tomap(var.additional_tags)
   )
@@ -17,7 +18,13 @@ resource "aws_subnet" "public_subnet" {
   cidr_block        = element(var.public_subnet_cidr_blocks, count.index)
   availability_zone = element(var.availability_zones, count.index)
   map_public_ip_on_launch = false
-  tags              = {}
+  tags   = merge(
+  { 
+    Name = "${application_name}-public-subnet"
+    time = timestamp()
+  }, 
+    tomap(var.additional_tags)
+  )
 }
 
 resource "aws_internet_gateway" "igw" {
@@ -48,7 +55,13 @@ resource "aws_subnet" "private_subnet" {
   cidr_block        = element(var.private_subnet_cidr_blocks, count.index)
   availability_zone = element(var.availability_zones, count.index)
   map_public_ip_on_launch = false
-  tags = {}
+  tags   = merge(
+  { 
+    Name = "${application_name}-private-subnet"
+    time = timestamp()
+  }, 
+    tomap(var.additional_tags)
+  )
 }
 
 resource "aws_eip" "eip" {
@@ -60,11 +73,23 @@ resource "aws_nat_gateway" "nat" {
   count           = length(var.availability_zones)
   allocation_id = aws_eip.eip[count.index].id
   subnet_id     = aws_subnet.private_subnet[count.index].id
-  tags = {}
+  tags   = merge(
+  { 
+    Name = "${application_name}-ngw"
+    time = timestamp()
+  }, 
+    tomap(var.additional_tags)
+  )
 }
 
 resource "aws_route_table" "rt" {
-  tags            = {}
+  tags   = merge(
+  { 
+    Name = "${application_name}-rt"
+    time = timestamp()
+  }, 
+    tomap(var.additional_tags)
+  )
   count           = length(var.availability_zones)
   vpc_id          = aws_vpc.vpc.id
   route {
@@ -78,3 +103,4 @@ resource "aws_route_table_association" "route_table_association" {
   subnet_id      = aws_subnet.private_subnet[count.index].id
   route_table_id = aws_route_table.rt[count.index].id
 }
+

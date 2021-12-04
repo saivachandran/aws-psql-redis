@@ -7,3 +7,4 @@ variable "additional_tags" {
     default = {}
 }
 
+variable "application_name" {}
