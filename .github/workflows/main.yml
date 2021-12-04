@@ -4,8 +4,8 @@ on:
   push:
     branches:
     - main
-    # paths:
-    # - 'infra-code/**'
+    paths:
+    - 'infra-code/**'
 jobs:
   dev:
     name: terraform deployment
@@ -13,13 +13,13 @@ jobs:
     env:
       BUCKET_NAME: "myweb-098"
       BUCKET_REGION: "us-east-1"
-    # strategy:
-    #   matrix:
-    #     folder: ['infra-code']
-    # defaults:
-    #   run:
-    #     shell: bash
-    #     working-directory: ${{ matrix.folder }}
+    strategy:
+      matrix:
+        folder: ['infra-code']
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ matrix.folder }}
     steps:
       - name: checkout
         uses: actions/checkout@v1
@@ -37,7 +37,7 @@ jobs:
         run: |
           terraform init \
           -backend-config="bucket=${{ env.BUCKET_NAME }}" \
-          -backend-config="key=dev/tfstate.tfstate" \
+          -backend-config="key=infra-code/tfstate.tfstate" \
           -backend-config="region=${{ env.BUCKET_REGION }}" \
           -backend=true
       - name: validate
