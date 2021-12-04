@@ -8,3 +8,11 @@ variable "additional_tags" {
 }
 
 variable "application_name" {}
+variable "instance_type" {}
+variable "availability_zone" {}
+variable "key_name" {}
+variable "instances" {
+  type        = any
+  default     = {}
+}
+
