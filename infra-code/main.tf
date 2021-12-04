@@ -12,20 +12,29 @@ resource "aws_subnet" "public_subnet" {
   cidr_block        = element(var.public_subnet_cidr_blocks, count.index)
   availability_zone = element(var.availability_zones, count.index)
   map_public_ip_on_launch = false
-  tags = {}
+  tags              = {}
 }
 
+resource "aws_internet_gateway" "igw" {
+  count             = length(var.availability_zones)
+  vpc_id            = aws_vpc.vpc.id
+}
 
+resource "aws_route_table" "main" {
+  count             = length(var.availability_zones)
+  vpc_id            = aws_vpc.vpc.id
+  tags              = {}
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw[count.index].id
+  }
+}
 
-
-
-
-
-
-
-
-
-
+resource "aws_route_table_association" "internet_access" {
+  count          = length(var.availability_zones)
+  subnet_id      = aws_subnet.public_subnet[count.index].id
+  route_table_id = aws_route_table.main[count.index].id
+}
 
 # Private subnet functins
 resource "aws_subnet" "private_subnet" {
